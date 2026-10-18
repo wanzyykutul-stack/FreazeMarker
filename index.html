@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freaze Market - Store Top-Up Game Terpercaya</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS client (public anon key only; never place service_role key in browser) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="modules/supabase-config.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0066ff',
+                            600: '#0052cc',
+                            700: '#003d99',
+                            800: '#002966',
+                            900: '#001433',
+                        }
+                    },
+                    animation: {
+                        'spin-slow': 'spin 8s linear infinite',
+                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.8, filter: 'drop-shadow(0 0 15px rgba(239,68,68,0.8)) drop-shadow(0 0 25px rgba(59,130,246,0.8))' },
+                            '50%': { opacity: 1, filter: 'drop-shadow(0 0 25px rgba(239,68,68,1)) drop-shadow(0 0 35px rgba(59,130,246,1))' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- MAIN NAVBAR -->
+    <nav class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 lg:px-8 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Brand Logo with Red & Blue Flame Animation -->
+            <div class="flex items-center gap-4 cursor-pointer" onclick="switchTab('home')">
+                <div class="flame-container w-10 h-10">
+                    <div class="flame-ring"></div>
+                    <div class="flame-ring-inner"></div>
+                    <div class="relative w-10 h-10 bg-slate-950 rounded-full flex items-center justify-center border border-white/20 z-10 shadow-inner">
+                        <i class="fa-solid fa-snowflake text-cyan-400 text-lg animate-pulse"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-white to-blue-500">
+                        FREAZE<span class="text-blue-400">MARKET</span>
+                    </span>
+                    <span class="text-[10px] text-slate-400 tracking-widest -mt-1 font-semibold">STORE TOPUP FAST & SAFE</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <button onclick="switchTab('home')" class="hover:text-cyan-400 transition flex items-center gap-2"><i class="fa-solid fa-house"></i> Beranda</button>
+                <button onclick="switchTab('catalog')" class="hover:text-cyan-400 transition flex items-center gap-2"><i class="fa-solid fa-gamepad"></i> Katalog Game</button>
+                <button onclick="switchTab('cek-transaksi')" class="hover:text-cyan-400 transition flex items-center gap-2"><i class="fa-solid fa-magnifying-glass"></i> Cek Invoice</button>
+            </div>
+
+            <!-- User Auth Status / Action Buttons -->
+            <div class="flex items-center gap-3" id="nav-auth-section">
+                <!-- Injected dynamically via JS -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6">
+
+        <!-- ==================== HOME TAB ==================== -->
+        <section id="tab-home" class="space-y-8">
+            <!-- Banner / Hero Section -->
+            <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-blue-900 via-slate-900 to-indigo-950 p-6 md:p-12 border border-blue-500/30 shadow-2xl shadow-blue-900/20">
+                <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl"></div>
+                <div class="absolute top-0 right-1/4 w-40 h-40 bg-red-600/10 rounded-full blur-2xl"></div>
+                
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <span class="px-3 py-1 bg-gradient-to-r from-red-500/20 to-blue-500/20 border border-blue-400/30 text-blue-300 rounded-full text-xs font-semibold uppercase tracking-wider">
+                        ⚡ Instant Process & Official Rate
+                    </span>
+                    <h1 class="text-3xl md:text-5xl font-black text-white leading-tight">
+                        Top-Up Game Favoritmu <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">Kilat & Amanah</span>
+                    </h1>
+                    <p class="text-slate-300 text-sm md:text-base">
+                        Layanan top-up otomatis 24/7 dengan pasaran harga termurah untuk Roblox, Free Fire, Mobile Legends, Valorant, dan game populer lainnya!
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button onclick="switchTab('catalog')" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-cyan-500/40 hover:scale-105 transition transform flex items-center gap-2">
+                            <i class="fa-solid fa-cart-shopping"></i> Top-Up Sekarang
+                        </button>
+                        <button onclick="switchTab('cek-transaksi')" class="px-6 py-3 bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold rounded-xl transition flex items-center gap-2">
+                            <i class="fa-solid fa-receipt"></i> Lacak Status Pesanan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular Games Grid -->
+            <div>
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-fire text-red-500"></i> Game Populer
+                    </h2>
+                    <button onclick="switchTab('catalog')" class="text-xs text-cyan-400 hover:underline">Lihat Semua Game &rarr;</button>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4" id="home-game-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Feature Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                <div class="glass-card p-6 rounded-xl border border-slate-800 flex items-start gap-4">
+                    <div class="p-3 bg-blue-500/10 text-blue-400 rounded-lg text-2xl"><i class="fa-solid fa-bolt"></i></div>
+                    <div>
+                        <h3 class="font-bold text-white mb-1">Proses Serba Otomatis</h3>
+                        <p class="text-xs text-slate-400">Sistem terhubung langsung secara real-time. Diamond & Item langsung masuk hitungan detik.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-6 rounded-xl border border-slate-800 flex items-start gap-4">
+                    <div class="p-3 bg-red-500/10 text-red-400 rounded-lg text-2xl"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div>
+                        <h3 class="font-bold text-white mb-1">Keamanan Terjamin</h3>
+                        <p class="text-xs text-slate-400">Metode garansi legal 100% aman anti-ban dengan proteksi enkripsi SSL & Bot Validator.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-6 rounded-xl border border-slate-800 flex items-start gap-4">
+                    <div class="p-3 bg-cyan-500/10 text-cyan-400 rounded-lg text-2xl"><i class="fa-solid fa-headset"></i></div>
+                    <div>
+                        <h3 class="font-bold text-white mb-1">Dukungan CS 24/7</h3>
+                        <p class="text-xs text-slate-400">Tim admin dan bot siap membantu memproses kendala pesanan Anda kapan saja.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CATALOG TAB ==================== -->
+        <section id="tab-catalog" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-white">Katalog Top-Up Game</h1>
+                    <p class="text-xs text-slate-400">Pilih game favoritmu dan selesaikan transaksi dengan aman</p>
+                </div>
+                <div class="relative max-w-xs w-full">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input type="text" id="catalog-search" oninput="renderCatalog()" placeholder="Cari nama game..." class="w-full bg-slate-900 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs focus:outline-none focus:border-blue-500 text-white">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4" id="catalog-game-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- ==================== GAME ORDER FORM TAB ==================== -->
+        <section id="tab-order" class="hidden space-y-6">
+            <button onclick="switchTab('catalog')" class="text-xs text-slate-400 hover:text-white flex items-center gap-2 mb-2">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Katalog
+            </button>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left Column: Game Info Card -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 sticky top-20">
+                        <img id="order-game-img" src="" alt="Game" class="w-24 h-24 rounded-2xl object-cover mb-4 border border-blue-500/30 shadow-lg shadow-blue-500/10">
+                        <h2 id="order-game-title" class="text-2xl font-black text-white"></h2>
+                        <p id="order-game-desc" class="text-xs text-slate-400 mt-2 leading-relaxed"></p>
+
+                        <div class="mt-6 pt-4 border-t border-slate-800 space-y-2 text-xs text-slate-300">
+                            <div class="flex items-center gap-2 text-emerald-400"><i class="fa-solid fa-circle-check"></i> 100% Legal & Safe</div>
+                            <div class="flex items-center gap-2 text-cyan-400"><i class="fa-solid fa-bolt"></i> Proses Otomatis (1 - 5 Menit)</div>
+                            <div class="flex items-center gap-2 text-blue-400"><i class="fa-solid fa-shield-halved"></i> Garansi Uang Kembali</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Step Form -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Step 1: Input ID / Account Detail -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-8 rounded-full bg-blue-600 font-bold text-white flex items-center justify-center text-sm shadow-md">1</span>
+                            <h3 class="font-bold text-white text-lg">Masukkan Data Akun</h3>
+                        </div>
+                        <div id="order-account-inputs" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Injected dynamically based on Game Type -->
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Select Nominal / Package -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-8 rounded-full bg-blue-600 font-bold text-white flex items-center justify-center text-sm shadow-md">2</span>
+                            <h3 class="font-bold text-white text-lg">Pilih Nominal Top-Up</h3>
+                        </div>
+                        <div id="order-packages-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Select Payment Method -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-blue-600 font-bold text-white flex items-center justify-center text-sm shadow-md">3</span>
+                                <h3 class="font-bold text-white text-lg">Pilih Metode Pembayaran</h3>
+                            </div>
+                            <span class="text-[11px] text-cyan-400 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-1 rounded-full"><i class="fa-solid fa-lock"></i> Midtrans Secure</span>
+                        </div>
+                        <div id="order-payments-list" class="space-y-3">
+                            <!-- Payment methods dynamic selection -->
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Checkout Action Bar -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <div class="space-y-2 text-sm border-b border-slate-800 pb-4">
+                            <div class="flex justify-between text-slate-400">
+                                <span>Harga Item:</span>
+                                <span id="summary-item-price" class="font-semibold text-white">Rp 0</span>
+                            </div>
+                            <div class="flex justify-between text-slate-400">
+                                <span>Biaya Layanan/Admin:</span>
+                                <span id="summary-admin-fee" class="font-semibold text-amber-400">Rp 0</span>
+                            </div>
+                            <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800/60">
+                                <span>Total Tagihan:</span>
+                                <span id="summary-total-price" class="text-cyan-400 text-xl font-extrabold">Rp 0</span>
+                            </div>
+                        </div>
+
+                        <button onclick="processCheckout()" id="btn-checkout" class="w-full py-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-extrabold text-lg rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-cyan-500/40 transition transform active:scale-98 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-shield-heart"></i> Bayar Sekarang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== INVOICE / CHECK TRANSACTIONS TAB ==================== -->
+        <section id="tab-cek-transaksi" class="hidden space-y-6 max-w-3xl mx-auto">
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 text-center space-y-4">
+                <div class="w-12 h-12 bg-blue-600/20 text-blue-400 rounded-full flex items-center justify-center mx-auto text-xl">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Cek & Lacak Pesanan Kamu</h2>
+                <p class="text-xs text-slate-400 max-w-md mx-auto">Masukkan Nomor Invoice unik kamu untuk mengecek status pembayaran dan proses pengiriman item game.</p>
+                
+                <div class="flex gap-2 max-w-lg mx-auto pt-2">
+                    <input type="text" id="search-invoice-input" placeholder="Contoh: INV-20261018-XXXX" class="flex-grow bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 uppercase tracking-widest text-center text-white">
+                    <button onclick="searchInvoice()" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 font-bold text-white rounded-xl transition text-sm">Cek</button>
+                </div>
+            </div>
+
+            <div id="invoice-result-card" class="hidden glass-card rounded-2xl p-6 border border-slate-800 space-y-6">
+                <!-- Dynamic Invoice Details injected here -->
+            </div>
+        </section>
+
+        <!-- ==================== SECRET ADMIN LOGIN MODAL ==================== -->
+        <div id="admin-login-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+            <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-red-500/30 space-y-6 shadow-2xl relative">
+                <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+                
+                <div class="text-center space-y-2">
+                    <div class="w-14 h-14 bg-red-500/10 border border-red-500/30 text-red-500 rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-lg shadow-red-500/10">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-white">Restricted Area</h3>
+                    <p class="text-xs text-slate-400">Masuk terlebih dahulu dengan akun pengguna. Akses hanya diberikan jika akun memiliki role admin di database.</p>
+                </div>
+
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold rounded-xl shadow-lg shadow-red-600/30 transition">
+                        Authenticate & Unlock Panel
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ==================== HIDDEN ADMIN DASHBOARD TAB ==================== -->
+        <section id="tab-admin-dashboard" class="hidden space-y-8">
+            <!-- Admin Top Bar -->
+            <div class="glass-card p-6 rounded-2xl border border-red-500/30 bg-gradient-to-r from-slate-900 via-slate-900 to-red-950/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-red-500/20 border border-red-500/40 text-red-400 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-2xl font-black text-white">ADMIN CONTROLLER PANEL</h1>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-red-500/20 text-red-400 border border-red-500/30 uppercase tracking-widest">Hidden Active</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Kelola Transaksi Manual, Bot Automation, Setting Biaya Fee, dan Penarikan Profit.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="lockAdminPanel()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs rounded-xl border border-slate-700 transition flex items-center gap-2">
+                        <i class="fa-solid fa-lock"></i> Lock Panel
+                    </button>
+                    <button onclick="logoutAdmin()" class="px-4 py-2 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-500/30 font-semibold text-xs rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Overview Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-card p-5 rounded-2xl border border-slate-800">
+                    <div class="text-xs text-slate-400 font-semibold uppercase mb-1">Total Transaksi</div>
+                    <div id="stat-total-tx" class="text-2xl font-black text-white">0</div>
+                    <div class="text-[11px] text-blue-400 mt-2"><i class="fa-solid fa-arrow-up-right-dots"></i> Semua Invoice Masuk</div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl border border-slate-800">
+                    <div class="text-xs text-slate-400 font-semibold uppercase mb-1">Pending Manual (Roblox/Dll)</div>
+                    <div id="stat-pending-tx" class="text-2xl font-black text-amber-400">0</div>
+                    <div class="text-[11px] text-amber-400 mt-2"><i class="fa-solid fa-clock"></i> Butuh Tindakan Admin</div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl border border-slate-800">
+                    <div class="text-xs text-slate-400 font-semibold uppercase mb-1">Total Omset Penjualan</div>
+                    <div id="stat-total-revenue" class="text-2xl font-black text-emerald-400">Rp 0</div>
+                    <div class="text-[11px] text-emerald-400 mt-2"><i class="fa-solid fa-money-bill-wave"></i> Gross Revenue</div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl border border-slate-800">
+                    <div class="text-xs text-slate-400 font-semibold uppercase mb-1">Saldo Saluran Admin Fee</div>
+                    <div id="stat-admin-fee-balance" class="text-2xl font-black text-cyan-400">Rp 0</div>
+                    <div class="text-[11px] text-cyan-400 mt-2"><i class="fa-solid fa-wallet"></i> Siap Ditarik / Withdraw</div>
+                </div>
+            </div>
+
+            <!-- Main Admin Controls Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column (2 Cols): Orders Table & Bot Monitor -->
+                <div class="lg:col-span-2 space-y-8">
+
+                    <!-- Orders Management Panel -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-white text-lg flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-blue-400"></i> Kelola Transaksi Masuk
+                            </h3>
+                            <button onclick="renderAdminDashboard()" class="text-xs text-slate-400 hover:text-white"><i class="fa-solid fa-rotate"></i> Refresh</button>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="border-b border-slate-800 text-slate-400 uppercase tracking-wider">
+                                        <th class="py-3 px-3">Invoice / Game</th>
+                                        <th class="py-3 px-3">Detail Akun</th>
+                                        <th class="py-3 px-3">Total Tagihan</th>
+                                        <th class="py-3 px-3">Status</th>
+                                        <th class="py-3 px-3 text-center">Aksi Admin</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-orders-tbody" class="divide-y divide-slate-800/60">
+                                    <!-- Injected dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Bot Log Monitor Panel -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-white text-lg flex items-center gap-2">
+                                <i class="fa-solid fa-robot text-cyan-400"></i> Bot Detector & Automation Log Monitor
+                            </h3>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Bot Status: ONLINE</span>
+                        </div>
+                        
+                        <div id="bot-logs-container" class="bg-slate-950 p-4 rounded-xl border border-slate-900 font-mono text-xs text-slate-300 h-48 overflow-y-auto space-y-2">
+                            <!-- Logs dynamically updated -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column (1 Col): Admin Settings & Withdraw -->
+                <div class="space-y-8">
+
+                    <!-- Admin Fee Settings -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <h3 class="font-extrabold text-white text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-gears text-amber-400"></i> Pengaturan Biaya Admin
+                        </h3>
+                        <p class="text-xs text-slate-400">Sesuaikan besaran Biaya Layanan / Admin Fee yang dibebankan kepada pembeli per transaksi.</p>
+
+                        <form onsubmit="saveAdminFeeSettings(event)" class="space-y-4 pt-2">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Tipe Biaya Admin</label>
+                                <select id="setting-fee-type" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                                    <option value="flat">Nominal Tetap (Rupiah / Flat)</option>
+                                    <option value="percent">Persentase (%)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Nilai Biaya Admin</label>
+                                <input type="number" id="setting-fee-value" placeholder="Contoh: 1500" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                            <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-md transition">
+                                Simpan Pengaturan
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Withdraw / Profit Withdrawal -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <h3 class="font-extrabold text-white text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-building-columns text-emerald-400"></i> Penarikan Keuntungan (Withdraw)
+                        </h3>
+                        <p class="text-xs text-slate-400">Tarik akumulasi keuntungan biaya admin ke Rekening Bank atau E-Wallet pilihanmu.</p>
+
+                        <div class="p-4 bg-emerald-950/40 border border-emerald-500/30 rounded-xl flex items-center justify-between">
+                            <span class="text-xs text-emerald-300 font-semibold">Tersedia Ditarik:</span>
+                            <span id="withdraw-available-amount" class="text-lg font-black text-emerald-400">Rp 0</span>
+                        </div>
+
+                        <form onsubmit="handleWithdrawSubmit(event)" class="space-y-3 pt-2">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Bank / E-Wallet Tujuan</label>
+                                <select id="withdraw-bank" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
+                                    <option value="BCA">Bank BCA</option>
+                                    <option value="Mandiri">Bank Mandiri</option>
+                                    <option value="BRI">Bank BRI</option>
+                                    <option value="DANA">DANA</option>
+                                    <option value="GoPay">GoPay</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor Rekening / HP</label>
+                                <input type="text" id="withdraw-account-no" placeholder="Contoh: 8820129301" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Nominal Withdraw (Rp)</label>
+                                <input type="number" id="withdraw-amount" placeholder="Minimal Rp 10.000" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
+                            </div>
+                            <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-md transition">
+                                Ajukan Penarikan
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== USER AUTH MODAL (LOGIN & REGISTER) ==================== -->
+        <div id="user-auth-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+            <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-slate-800 space-y-6 relative">
+                <button onclick="closeUserAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+                
+                <!-- Auth Header Tabs -->
+                <div class="flex border-b border-slate-800">
+                    <button id="auth-tab-btn-login" onclick="switchAuthSubTab('login')" class="flex-1 py-3 text-sm font-bold text-blue-400 border-b-2 border-blue-500">Masuk Akun</button>
+                    <button id="auth-tab-btn-register" onclick="switchAuthSubTab('register')" class="flex-1 py-3 text-sm font-bold text-slate-400 hover:text-white">Daftar Akun Baru</button>
+                </div>
+
+                <!-- Google OAuth via Supabase (requires dashboard setup) -->
+                <button onclick="handleGoogleFastLogin()" class="w-full py-3 bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm rounded-xl shadow-md flex items-center justify-center gap-3 transition">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                    Lanjutkan dengan Google
+                </button>
+
+                <div class="flex items-center my-4">
+                    <div class="flex-grow border-t border-slate-800"></div>
+                    <span class="px-3 text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Atau Manual</span>
+                    <div class="flex-grow border-t border-slate-800"></div>
+                </div>
+
+                <!-- Form Login -->
+                <form id="form-user-login" onsubmit="handleUserLoginSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Email / Gmail</label>
+                        <input type="email" id="login-identifier" required placeholder="nama@gmail.com" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Kata Sandi</label>
+                        <input type="password" id="login-password" required placeholder="••••••••" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-lg transition">Masuk Akun</button>
+                </form>
+
+                <!-- Form Register -->
+                <form id="form-user-register" onsubmit="handleUserRegisterSubmit(event)" class="space-y-3 hidden">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
+                        <input type="text" id="reg-full-name" required minlength="2" autocomplete="name" placeholder="Nama lengkap kamu" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Username</label>
+                        <input type="text" id="reg-username" required minlength="3" maxlength="24" pattern="[A-Za-z0-9_]+" autocomplete="username" placeholder="username_kamu" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Lahir</label>
+                        <input type="date" id="reg-date-of-birth" required autocomplete="bday" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Alamat Email</label>
+                        <input type="email" id="reg-email" required placeholder="email@gmail.com" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Kata Sandi</label>
+                        <input type="password" id="reg-password" required minlength="8" autocomplete="new-password" placeholder="Minimal 8 karakter" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Konfirmasi Kata Sandi</label>
+                        <input type="password" id="reg-password-confirm" required minlength="8" autocomplete="new-password" placeholder="Ulangi kata sandi" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-lg transition">Daftar Sekarang</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER WITH SECRET TRIGGER -->
+    <footer class="bg-slate-900 border-t border-slate-800 mt-12 py-8 px-4 text-center text-xs text-slate-400 space-y-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Secret Trigger Logo in Footer (5x Rapid Clicks opens Secret Admin Login) -->
+            <div onclick="handleFooterSecretClick()" class="flex items-center gap-3 cursor-pointer group select-none" title="Official Freaze Market Badge">
+                <div class="w-8 h-8 bg-blue-600/20 border border-blue-500/40 text-blue-400 rounded-lg flex items-center justify-center font-black group-hover:scale-105 transition">
+                    FM
+                </div>
+                <div class="text-left">
+                    <span class="text-white font-bold tracking-wider">FREAZE MARKET</span>
+                    <p class="text-[10px] text-slate-500">© 2026 Freaze Market Inc. All Rights Reserved.</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-6 text-slate-400">
+                <a href="#" class="hover:text-white transition">Syarat & Ketentuan</a>
+                <a href="#" class="hover:text-white transition">Kebijakan Privasi</a>
+                <a href="#" class="hover:text-white transition">Hubungi CS</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+        <script src="modules/state-and-data.js"></script>
+    <script src="modules/supabase-service.js"></script>
+    <script src="modules/initialization.js"></script>
+    <script src="modules/navigation.js"></script>
+    <script src="modules/admin-access.js"></script>
+    <script src="modules/admin-authentication.js"></script>
+    <script src="modules/catalog-and-order.js"></script>
+    <script src="modules/checkout-and-payment.js"></script>
+    <script src="modules/invoice.js"></script>
+    <script src="modules/admin-dashboard.js"></script>
+    <script src="modules/user-authentication.js"></script>
+    <script src="modules/notifications.js"></script>
+</body>
+</html>
